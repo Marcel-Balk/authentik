@@ -46,12 +46,12 @@ import TabItem from "@theme/TabItem";
 
 If this is a fresh authentik installation, you need to generate a password and a secret key. Use a secure password generator of your choice such as pwgen, or you can use `openssl` as below.
 
-Run the following commands to generate a password and secret key and write them to your `.env` file:
+Run the following commands to generate a password and secret key and write them to your `.env` file (Make sure the .env file is in the root of your system /):
 
 {/* prettier-ignore */}
 ```shell
-echo "PG_PASS=$(openssl rand -base64 36)" >> .env
-echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 36)" >> .env
+echo "PG_PASS=$(openssl rand -base64 36)" >> /.env
+echo "AUTHENTIK_SECRET_KEY=$(openssl rand -base64 36)" >> /.env
 ```
 
 :::info
@@ -61,14 +61,14 @@ Because of a PostgreSQL limitation, only passwords up to 99 chars are supported.
 To enable error reporting, run the following command:
 
 ```shell
-echo "AUTHENTIK_ERROR_REPORTING__ENABLED=true" >> .env
+echo "AUTHENTIK_ERROR_REPORTING__ENABLED=true" >> /.env
 ```
 
 ## Email configuration (optional but recommended)
 
 It is also recommended to configure global email credentials. These are used by authentik to notify you about alerts and configuration issues. They can also be used by [Email stages](../flow/stages/email/) to send verification/recovery emails.
 
-To configure email credentials, append this block to your `.env` file
+To configure email credentials, append this block to your `/.env` file
 
 ```shell
 # SMTP Host Emails are sent to
@@ -109,8 +109,8 @@ This will not give any advantages. It will cause problems with OAuth and SAML au
 Afterward, run these commands to finish:
 
 ```shell
-docker compose pull
-docker compose up -d
+docker-compose pull
+docker-compose up -d
 ```
 
 The `docker-compose.yml` file statically references the latest version available at the time of downloading the compose file. Each time you upgrade to a newer version of authentik, you download a new `docker-compose.yml` file, which points to the latest available version. For more information, refer to the **Upgrading** section in the [Release Notes](../releases).
